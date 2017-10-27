@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app.works">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css">
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+    <!-- <script src="/assets/js/angular.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+    <script src="/assets/js/main/app.js"></script>
+    <script src="/assets/js/main/services/svWorks.js"></script>
+     
+
+    <title>To do list</title>
+</head>
+<body ng-controller="workController">
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>{{ appName }} <span class="label label-info">{{ works.length }}</span></h1>
+        </div>
+
+        <div class="row" id="work-list"  >
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="checkbox" ng-repeat="work in works">
+                    <input type="checkbox" ng-model="work.isDone" ng-change="updateWork(work)">
+
+                    <a href ng-click="deleteWork(work)"><i class="fa fa-remove"></i></a>
+                    <a href ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i class="fa fa-edit" ></i></a>
+                    <span ng-class="{strike: work.isDone}" editable-text="work.text" e-form="textBtnForm" onaftersave="updateWork(work)"> {{ work.text }} </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" id="work-form">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg text-center" ng-model="formData.text" placeholder="enter word need to do...">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!formData.text" ng-click="createWork()" > ADD </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>
